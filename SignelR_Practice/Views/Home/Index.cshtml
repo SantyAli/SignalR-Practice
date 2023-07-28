@@ -1,0 +1,59 @@
+﻿@model SignelR_Practice.Models.View_Model.MessageList
+
+<style>
+    .table {
+        border-collapse: collapse;
+    }
+
+        .table td {
+            border: none;
+        }
+</style>
+<b id="receiverId" hidden>@Model.ReceiverId</b>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.AllMessages)
+        {
+            <tr>
+                @if (item.IsLeft == 1)
+                {
+                    <td id="receiver">
+                    </td>
+                    <td id="sender">
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                }
+                else
+                {
+                    <td id="receiver">
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                    <td id="sender">
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<footer class="border-top footer text-muted">
+    <div class="container" style="display: inline-block; position: fixed; bottom: 0;">
+        <div class="row p-1">
+            <div class="col-1">Message</div>
+            <div class="col-5"><input type="text" class="w-100" id="messageInput" name="receiver" /></div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6 text-end">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+
+
+
+</footer>
+
+<script>window.scrollTo(0, document.body.scrollHeight);</script>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<script src="~/js/Notification.js"></script>
